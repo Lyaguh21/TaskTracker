@@ -70,7 +70,11 @@ export default function TaskTemplate({ task }: { task: ITask }) {
                 onCompletedChange(event.currentTarget.checked)
               }
             />
-            <Text size="lg" fw={700}>
+            <Text
+              size="lg"
+              fw={700}
+              c={task.completed ? "white-color.3" : "black"}
+            >
               {task.completed ? <s>{task.name}</s> : task.name}
             </Text>
           </Group>
