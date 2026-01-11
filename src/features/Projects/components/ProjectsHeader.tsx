@@ -1,7 +1,11 @@
 import { Flex, Text, Button } from "@mantine/core";
 import { IconPlus } from "@tabler/icons-react";
+import { setOpenCreateProjectModal } from "../../../entities/view/model/viewSlice";
+import { useAppDispatch } from "../../../app/store/hooks";
 
 export default function ProjectsHeader() {
+  const dispatch = useAppDispatch();
+
   return (
     <Flex
       w="100%"
@@ -14,7 +18,13 @@ export default function ProjectsHeader() {
       <Text size="xl" fw={700}>
         Проекты
       </Text>
-      <Button variant="light" leftSection={<IconPlus />}>
+      <Button
+        variant="light"
+        leftSection={<IconPlus />}
+        onClick={() => {
+          dispatch(setOpenCreateProjectModal(true));
+        }}
+      >
         Создать проект
       </Button>
     </Flex>
