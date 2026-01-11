@@ -1,7 +1,7 @@
-export interface Task {
+export interface ITask {
   id: string;
   projectId: string;
-  title: string;
+  name: string;
   completed: boolean;
-  createdAt: Date;
+  createdAt: number;
 }

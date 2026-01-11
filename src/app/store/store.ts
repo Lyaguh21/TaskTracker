@@ -2,11 +2,13 @@ import { configureStore } from "@reduxjs/toolkit";
 import { viewSlice } from "../../entities/view/model/viewSlice";
 import { projectsSlice } from "../../entities/projects/model/projectsSlice";
 import { listenerMiddleware, registerListeners } from "./listenerMiddleware";
+import { tasksSlice } from "../../entities/tasks/model/tasksSlice";
 
 export const store = configureStore({
   reducer: {
     view: viewSlice.reducer,
     projects: projectsSlice.reducer,
+    tasks: tasksSlice.reducer,
   },
 
   middleware: (getDefaultMiddleware) =>
