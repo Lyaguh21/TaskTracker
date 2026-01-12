@@ -1,63 +1,54 @@
-# Lyaguh Template
+# Task Manager (Redux Toolkit + TypeScript)
 
-Шаблон моих проектов для быстрого создания
+Мини-приложение для управления проектами и задачами. Проект сделан как практика по  Redux Toolkit: slices, entityAdapter, selectors, listenerMiddleware, persist в localStorage и поиск с debounce.
 
-Установленные библиотеки :
-- React + TS
-- MantineUI
-- ReactRouter
-- TablerIcons (Первая загрузка может быть долгим из-за этой библиотеки, если вы сталкиваетесь с проблемой производительности можете попробовать заменить ее на похожие, по типу ReactIcons)
+![Main](screenshots/main.png)
 
-Создана архитектура FSD, настроен роутинг
+---
 
-Архитектура:
-```text
-Lyaguh Template/
-├── public	Изображения и стороннние иконки
-│   ├── icons 
-│   ├── img
-│
-├── src
-│   ├── app	Входная точка приложения и общие настройки
-│   │   ├── providers	Глобальные стили и роуты
-│   │   │   ├── index.css
-│   │   │   └── Router.tsx
-│   │   ├── App.tsx
-│   │   ├── helpers.js
-│   │   ├── main.tsx
-│   │   ├── theme.ts
-│   │   └── vite-env.d.ts
-│   │
-│   ├── entities	Бизнес сущности(интерфейсы, хранилища, хуки)
-│   │
-│   ├── pages	Страницы веб-приложения
-│   │   ├── About
-│   │   ├── Errors
-│   │   └── Main
-│   │
-│   ├── layouts	Макеты
-│   │   └── MainLayout
-│   │
-│   ├── features	Пользовательские фичи
-│   ├── shared	Переиспользуемые UI компоненты
-│   └── widgets	Переиспользуемые UI блоки
-├── index.html
-├── package-lock.json
-├── package.json
-├── postcss.config.cjs
-├── README.md
-├── tsconfig.json
-├── tsconfig.node.json
-├── vite.config.ts
-└── yarn.lock```
+## Возможности
 
-Как я использую FSD:
-/app - Корневые файлы (app, main...)
-/entities - Бизнес сущности (интерфейсы, хранилища, хуки, типы...)
-/layouts - Макеты приложения (Main, Register...)
-/pages - Страницы в которых используются фичи
-/features - Фичи которыми полльзуется пользователь (Оставление лайка, регистрация и.тд)
-/shared - Переиспользуемые UI компоненты (Кнопки, инпуты...)
-/widgets - Переиспользуемые UI блоки (Header, Navbar...)
+### Projects
+- Создание проекта
+- Переименование проекта
+- Удаление проекта
+- Подсчёт количества задач в проекте
+- При удалении проекта — каскадное удаление связанных задач
 
-Каждый слой делится на слайсы, они в свою очередь на сегменты.
+### Tasks
+- Создание задачи в выбранном проекте
+- Toggle completed
+- Переименование задачи
+- Удаление задачи
+- Фильтрация: `all / active / completed`
+- Сортировка: `newest / title`
+- Поиск по названию (case-insensitive, частичное совпадение)
+- Debounce поиска: ввод (`search`) → применённый поиск (`searchApply`) через ~300ms
+
+### Persist (localStorage)
+Сохраняются:
+- выбранный проект (`selectedProjectId`)
+- фильтр / сортировка
+- применённая строка поиска (`searchApply`)
+- (опционально) проекты и задачи — если включено сохранение в listeners
+
+---
+
+## Технологии
+
+- React + TypeScript
+- Redux Toolkit
+  - `createSlice`
+  - `createEntityAdapter`
+  - `createSelector`
+  - `listenerMiddleware`
+- Архитектура, приближенная к FSD 
+- Persist через `localStorage`
+
+---
+
+## Быстрый старт
+
+```bash
+npm install
+npm run dev
