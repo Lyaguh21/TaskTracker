@@ -8,6 +8,7 @@ import ConfirmActionModal from "../../../shared/ui/ConfirmActionModal";
 import { useDisclosure } from "@mantine/hooks";
 import { projectRemoved } from "../../../entities/projects/model/projectsSlice";
 import EditProjectModal from "./Modals/EditProjectModal";
+import { tasksSelectors } from "../../../entities/tasks/model/tasksSelectors";
 
 export default function ProjectTemplate({ project }: { project: IProject }) {
   const [
@@ -18,7 +19,12 @@ export default function ProjectTemplate({ project }: { project: IProject }) {
     useDisclosure(false);
   const dispatch = useAppDispatch();
   const selectedProject = useAppSelector(selectProjectId);
+  const tasks = useAppSelector(tasksSelectors.selectAll);
 
+  const countTasks = tasks.reduce(function (prev, item) {
+    if (item.projectId === project.id) return prev + 1;
+    return prev;
+  }, 0);
   return (
     <>
       <EditProjectModal opened={openedEditModal} onClose={closeEditModal} />
@@ -56,7 +62,7 @@ export default function ProjectTemplate({ project }: { project: IProject }) {
             {project.name}
           </Text>
           <Text size="sm" c="gray">
-            8 Задач
+            {countTasks} Задач
           </Text>
           <Text size="sm" c="gray">
             {new Date(project.createdAt).toLocaleString("ru-RU", {
