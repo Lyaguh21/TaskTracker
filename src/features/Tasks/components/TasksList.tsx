@@ -2,15 +2,13 @@ import { Center, ScrollArea, Stack } from "@mantine/core";
 import EmptyBadge from "../../../shared/ui/EmptyBadge";
 import { IconArrowLeft, IconMoodEmpty } from "@tabler/icons-react";
 import { useAppSelector } from "../../../app/store/hooks";
-import { selectProjectId } from "../../../entities/view/model/viewSelectors";
-import { tasksSelectors } from "../../../entities/tasks/model/tasksSelectors";
+import { selectVisibleTask } from "../../../entities/tasks/model/tasksSelectors";
 import TaskTemplate from "./TaskTemplate";
+import { selectProjectId } from "../../../entities/view/model/viewSelectors";
 
 export default function TasksList() {
   const selectedProjectId = useAppSelector(selectProjectId);
-  const taskList = useAppSelector(tasksSelectors.selectAll).filter(
-    (el) => el.projectId === selectedProjectId
-  );
+  const ViewTasksList = useAppSelector(selectVisibleTask);
 
   if (!selectedProjectId)
     return (
@@ -30,7 +28,7 @@ export default function TasksList() {
       </Center>
     );
 
-  if (taskList.length === 0)
+  if (ViewTasksList.length === 0)
     return (
       <Center
         w="100%"
@@ -49,9 +47,9 @@ export default function TasksList() {
     );
 
   return (
-    <ScrollArea h="calc(100% - 70px)" p={16}>
+    <ScrollArea h="calc(100% - 70px - 113.6px)" p={16}>
       <Stack>
-        {taskList.map((task) => (
+        {ViewTasksList.map((task) => (
           <TaskTemplate key={task.id} task={task} />
         ))}
       </Stack>

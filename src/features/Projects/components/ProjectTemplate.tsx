@@ -43,6 +43,7 @@ export default function ProjectTemplate({ project }: { project: IProject }) {
             selectedProject === project.id
               ? "2px solid var(--mantine-color-primary-color-5)"
               : "2px solid var(--mantine-color-white-color-1)",
+          cursor: "pointer",
         }}
         p={10}
         onClick={() => {

@@ -3,8 +3,9 @@ import { IconPlus } from "@tabler/icons-react";
 import { useAppDispatch, useAppSelector } from "../../../app/store/hooks";
 import { selectProjectId } from "../../../entities/view/model/viewSelectors";
 import { setOpenCreateTaskModal } from "../../../entities/view/model/viewSlice";
+import { memo } from "react";
 
-export default function TasksHeader() {
+export default memo(function TasksHeader() {
   const dispatch = useAppDispatch();
   const selectedProjectId = useAppSelector(selectProjectId);
 
@@ -33,4 +34,4 @@ export default function TasksHeader() {
       </Button>
     </Flex>
   );
-}
+});

@@ -8,10 +8,10 @@ import {
   taskRemoved,
   taskUpdated,
 } from "../../../entities/tasks/model/tasksSlice";
-import { useState } from "react";
+import { memo, useCallback } from "react";
 import { ITask } from "../../../entities/tasks/model/types";
 
-export default function TaskTemplate({ task }: { task: ITask }) {
+export default memo(function TaskTemplate({ task }: { task: ITask }) {
   const [
     openedDeleteModal,
     { open: openDeleteModal, close: closeDeleteModal },
@@ -19,20 +19,21 @@ export default function TaskTemplate({ task }: { task: ITask }) {
   const [openedEditModal, { open: openEditModal, close: closeEditModal }] =
     useDisclosure(false);
 
-  const [completed, setCompleted] = useState(task?.completed || false);
   const dispatch = useAppDispatch();
 
-  const onCompletedChange = (value: boolean) => {
-    setCompleted(value);
-    dispatch(
-      taskUpdated({
-        id: task.id,
-        changes: {
-          completed: value,
-        },
-      })
-    );
-  };
+  const onCompletedChange = useCallback(
+    (value: boolean) => {
+      dispatch(
+        taskUpdated({
+          id: task.id,
+          changes: {
+            completed: value,
+          },
+        })
+      );
+    },
+    [dispatch, task.id]
+  );
 
   return (
     <>
@@ -65,7 +66,7 @@ export default function TaskTemplate({ task }: { task: ITask }) {
           <Group gap={10}>
             <Checkbox
               size="lg"
-              checked={completed}
+              checked={task.completed}
               onChange={(event) =>
                 onCompletedChange(event.currentTarget.checked)
               }
@@ -106,4 +107,4 @@ export default function TaskTemplate({ task }: { task: ITask }) {
       </Flex>
     </>
   );
-}
+});
