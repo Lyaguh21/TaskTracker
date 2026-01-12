@@ -49,7 +49,7 @@ export default function TasksList() {
   return (
     <ScrollArea h="calc(100% - 70px - 113.6px)" p={16}>
       <Stack>
-        {ViewTasksList.map((task) => (
+        {ViewTasksList?.map((task) => (
           <TaskTemplate key={task.id} task={task} />
         ))}
       </Stack>

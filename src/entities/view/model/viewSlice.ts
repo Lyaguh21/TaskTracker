@@ -13,21 +13,18 @@ export interface IViewSlice {
   };
 }
 
-const initialState: IViewSlice = {
-  selectProjectId: localStorage.getItem("selectedProject") || null,
-  filter: (localStorage.getItem("filter") as TASKS_FILTERS) || "all",
-  sort: (localStorage.getItem("sort") as TASKS_SORTED) || "newest",
-  search: (localStorage.getItem("search") as string) || "",
-  searchApply: (localStorage.getItem("search") as string) || "",
-  ui: {
-    openCreateProjectModal: false,
-    openCreateTaskModal: false,
-  },
+export const viewInitialState: IViewSlice = {
+  selectProjectId: null,
+  filter: "all",
+  sort: "newest",
+  search: "",
+  searchApply: "",
+  ui: { openCreateProjectModal: false, openCreateTaskModal: false },
 };
 
 export const viewSlice = createSlice({
   name: "view",
-  initialState,
+  initialState: viewInitialState,
   reducers: {
     setSelectProjectId: (state, action) => {
       state.selectProjectId = action.payload;

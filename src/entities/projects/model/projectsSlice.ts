@@ -5,13 +5,13 @@ export const projectsAdapter = createEntityAdapter<IProject>({
   sortComparer: (a, b) => b.createdAt - a.createdAt,
 });
 
-const initialState =
+export const projectInitialState =
   JSON.parse(localStorage.getItem("projects") || "null") ||
   projectsAdapter.getInitialState();
 
 export const projectsSlice = createSlice({
   name: "projects",
-  initialState,
+  initialState: projectInitialState,
   reducers: {
     projectAdded: projectsAdapter.addOne,
     projectUpdated: projectsAdapter.updateOne,

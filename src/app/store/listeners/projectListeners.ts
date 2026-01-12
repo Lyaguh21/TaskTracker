@@ -15,4 +15,10 @@ export function projectListeners() {
       );
     },
   });
+  startAppListening({
+    matcher: isAnyOf(projectRemoved),
+    effect: async (action, listenerApi) => {
+      localStorage.removeItem("selectedProject");
+    },
+  });
 }

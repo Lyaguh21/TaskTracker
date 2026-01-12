@@ -6,14 +6,14 @@ export const tasksAdapter = createEntityAdapter<ITask>({
   sortComparer: (a, b) => b.createdAt - a.createdAt,
 });
 
-const initialState = JSON.parse(
+export const tasksInitialState = JSON.parse(
   localStorage.getItem("tasks") ||
     JSON.stringify(tasksAdapter.getInitialState())
 );
 
 export const tasksSlice = createSlice({
   name: "tasks",
-  initialState,
+  initialState: tasksInitialState,
   reducers: {
     taskAdded: tasksAdapter.addOne,
     taskUpdated: tasksAdapter.updateOne,

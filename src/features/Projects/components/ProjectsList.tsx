@@ -33,7 +33,7 @@ export default function ProjectsList() {
   return (
     <ScrollArea h="calc(100% - 70px)" p={16}>
       <Stack>
-        {projects.map((project) => (
+        {projects?.map((project) => (
           <ProjectTemplate key={project.id} project={project} />
         ))}
       </Stack>
